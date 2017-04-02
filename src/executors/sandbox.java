@@ -2,33 +2,25 @@ package executors;
 
 public class sandbox implements Runnable {
 
-    private String action;
+    private String ThreadNumber;
 
-    public sandbox(String myString) {
-        this.action = myString;
+    public sandbox(String ThreadNumber) {
+        this.ThreadNumber = ThreadNumber;
     }
 
+    @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName()+" Begin: Action = "+ action);
-        processCommand();
-        System.out.println(Thread.currentThread().getName()+" Finished.");
+        System.out.println("Thread name: " + Thread.currentThread().getName() + ", Thread number = " + ThreadNumber);
+        getID();
     }
 
-    private void processCommand() {
-
+    private void getID() {
         try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
+            Thread.sleep(500);
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-    }
-
-
-
-
-    public String toString(){
-        return this.action;
     }
 
 }

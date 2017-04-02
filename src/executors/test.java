@@ -1,31 +1,29 @@
 package executors;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        // Creates executor that can run 5 runnables
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-        for (int i = 0; i < 10; i++) {
-            Runnable myRunnable = new sandbox(" " + i);
-            executor.execute(myRunnable);
-        }
-        executor.shutdown();
-
-        // executors will not work if a null is entered into them.  Example of this:
         try {
-            ExecutorService nullExecutor = Executors.newSingleThreadExecutor();
-            nullExecutor.execute(null);
-        }catch (Exception e){
-            System.out.println("Null value cannot be entered");
+            for (int i = 0; i < 5; i++) {
+            	sandbox rfee = new sandbox(" " + i);
+                executorService.execute(rfee);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        executorService.shutdown();
 
-        System.out.println("Task Completed!");
+        while (!executorService.isTerminated()) {
+        }
 
+        System.out.println("Your Threads have been woven!");
     }
+
 }
